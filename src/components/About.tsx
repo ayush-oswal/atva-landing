@@ -38,7 +38,7 @@ export default function About() {
 
             <div className="mt-8 grid grid-cols-2 gap-6">
               <div>
-                <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-1">
+                <div className="text-2xl font-bold bg-gradient-to-r from-ember to-fire bg-clip-text text-transparent mb-1">
                   Data-Driven
                 </div>
                 <p className="text-sm text-white/70">
@@ -46,7 +46,7 @@ export default function About() {
                 </p>
               </div>
               <div>
-                <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-1">
+                <div className="text-2xl font-bold bg-gradient-to-r from-ember to-fire bg-clip-text text-transparent mb-1">
                   Results-First
                 </div>
                 <p className="text-sm text-white/70">
@@ -64,14 +64,14 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="aspect-square rounded-3xl bg-gradient-to-br from-cyan-900/30 via-purple-900/50 to-zinc-900 border border-cyan-500/20 p-8 flex items-center justify-center">
+            <div className="aspect-square rounded-3xl bg-gradient-to-br from-clay/30 via-fire/50 to-zinc-900 border border-ember/20 p-8 flex items-center justify-center">
               <div className="text-center">
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="w-32 h-32 mx-auto mb-6 rounded-full border-2 border-dashed border-cyan-500/50"
+                  className="w-32 h-32 mx-auto mb-6 rounded-full border-2 border-dashed border-ember/50"
                 />
-                <div className="text-6xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                <div className="text-6xl font-bold bg-gradient-to-r from-ember to-fire bg-clip-text text-transparent">
                   atva
                 </div>
                 <p className="text-white/70 mt-2 text-sm">
@@ -81,8 +81,8 @@ export default function About() {
             </div>
 
             {/* Decorative elements */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 bg-cyan-500/20 rounded-full blur-2xl" />
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl" />
+            <div className="absolute -top-4 -right-4 w-24 h-24 bg-ember/20 rounded-full blur-2xl" />
+            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-fire/10 rounded-full blur-3xl" />
           </motion.div>
         </div>
       </div>

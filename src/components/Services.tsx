@@ -91,12 +91,12 @@ export default function Services() {
               key={service.title}
               variants={cardVariants}
               whileHover={{ scale: 1.02, y: -5 }}
-              className="group relative p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-transparent transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10"
+              className="group relative p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-transparent transition-all duration-300 hover:shadow-lg hover:shadow-ember/10"
             >
               {/* Gradient border on hover */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/0 via-purple-500/0 to-cyan-500/0 group-hover:from-cyan-500/50 group-hover:via-purple-500/50 group-hover:to-cyan-500/50 transition-all duration-300 -z-10 blur-sm" />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-ember/0 via-fire/0 to-ember/0 group-hover:from-ember/50 group-hover:via-fire/50 group-hover:to-ember/50 transition-all duration-300 -z-10 blur-sm" />
               <div className="text-4xl mb-4">{service.icon}</div>
-              <h3 className="text-xl font-semibold text-white mb-3 group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-400 group-hover:bg-clip-text group-hover:text-transparent transition-colors">
+              <h3 className="text-xl font-semibold text-white mb-3 group-hover:bg-gradient-to-r group-hover:from-ember group-hover:to-fire group-hover:bg-clip-text group-hover:text-transparent transition-colors">
                 {service.title}
               </h3>
               <p className="text-white text-sm leading-relaxed">

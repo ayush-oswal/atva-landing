@@ -82,7 +82,7 @@ export default function FAQ() {
                 <motion.span
                   animate={{ rotate: openIndex === index ? 45 : 0 }}
                   transition={{ duration: 0.2 }}
-                  className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent text-2xl flex-shrink-0"
+                  className="bg-gradient-to-r from-ember to-fire bg-clip-text text-transparent text-2xl flex-shrink-0"
                 >
                   +
                 </motion.span>

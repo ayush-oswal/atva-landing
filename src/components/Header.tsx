@@ -62,7 +62,7 @@ export default function Header() {
     >
       {/* Gradient border wrapper - always visible */}
       <div
-        className="p-[1px] rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-cyan-400"
+        className="p-[1px] rounded-full bg-gradient-to-r from-ember via-fire to-ember"
       >
         <div
           className={`px-6 py-3 rounded-full transition-all duration-500 ${
@@ -87,7 +87,7 @@ export default function Header() {
                   >
                     {item.label}
                     <motion.span
-                      className="absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-cyan-400 to-purple-500"
+                      className="absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-ember to-fire"
                       initial={{ width: 0 }}
                       whileHover={{ width: "100%" }}
                       transition={{ duration: 0.3 }}
@@ -98,7 +98,7 @@ export default function Header() {
             </motion.ul>
 
             <motion.div
-              className="w-px h-6 bg-gradient-to-b from-cyan-400/50 to-purple-500/50"
+              className="w-px h-6 bg-gradient-to-b from-ember/50 to-fire/50"
               initial={{ scaleY: 0 }}
               animate={{ scaleY: 1 }}
               transition={{ duration: 0.5, delay: 0.8 }}

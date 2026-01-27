@@ -9,7 +9,7 @@ export default function Footer() {
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="py-12 px-6 border-t border-zinc-800"
+      className="py-12 px-6 border-t border-ember/20"
     >
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -25,7 +25,7 @@ export default function Footer() {
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zinc-500 hover:text-cyan-400 transition-colors"
+              className="text-zinc-500 hover:text-ember transition-colors"
               aria-label="Instagram"
             >
               <svg

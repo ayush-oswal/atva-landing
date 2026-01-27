@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const projects = [
   {
@@ -106,16 +106,16 @@ export default function Work() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             whileHover={{ y: -5 }}
-            className="flex-shrink-0 w-80 p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-cyan-500/50 transition-all duration-300 group"
+            className="flex-shrink-0 w-80 p-6 rounded-2xl bg-zinc-900/50 border border-ember/20 hover:border-ember/50 transition-all duration-300 group"
           >
             {/* Image placeholder */}
-            <div className="aspect-video rounded-xl bg-gradient-to-br from-cyan-900/30 via-purple-900/50 to-zinc-800 mb-4 flex items-center justify-center">
+            <div className="aspect-video rounded-xl bg-gradient-to-br from-clay/30 via-fire/50 to-zinc-800 mb-4 flex items-center justify-center">
               <div className="text-4xl opacity-50">🖼️</div>
             </div>
-            <div className="text-xs bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent font-medium mb-2">
+            <div className="text-xs bg-gradient-to-r from-ember to-fire bg-clip-text text-transparent font-medium mb-2">
               {project.category}
             </div>
-            <h3 className="text-lg font-semibold text-white mb-2 group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-400 group-hover:bg-clip-text group-hover:text-transparent transition-colors">
+            <h3 className="text-lg font-semibold text-white mb-2 group-hover:bg-gradient-to-r group-hover:from-ember group-hover:to-fire group-hover:bg-clip-text group-hover:text-transparent transition-colors">
               {project.title}
             </h3>
             <p className="text-sm text-white/80">{project.description}</p>

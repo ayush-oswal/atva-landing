@@ -70,7 +70,7 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="max-w-2xl mx-auto mb-16 p-6 rounded-2xl bg-gradient-to-r from-cyan-900/30 via-purple-900/30 to-cyan-900/30 border border-cyan-500/30 text-center"
+          className="max-w-2xl mx-auto mb-16 p-6 rounded-2xl bg-gradient-to-r from-clay/30 via-fire/30 to-clay/30 border border-ember/30 text-center"
         >
           <h3 className="text-xl font-semibold text-white mb-2">
             Pay-As-You-Go Model
@@ -92,12 +92,12 @@ export default function Pricing() {
               whileHover={{ y: -5 }}
               className={`relative p-6 rounded-2xl border transition-all duration-300 ${
                 plan.popular
-                  ? "bg-gradient-to-b from-cyan-900/30 via-purple-900/40 to-zinc-900/50 border-cyan-500/50 shadow-lg shadow-cyan-500/10"
-                  : "bg-zinc-900/50 border-zinc-800 hover:border-cyan-500/30"
+                  ? "bg-gradient-to-b from-clay/30 via-fire/40 to-zinc-900/50 border-ember/50 shadow-lg shadow-ember/10"
+                  : "bg-zinc-900/50 border-zinc-800 hover:border-ember/30"
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-cyan-500 to-purple-600 text-white text-xs font-semibold rounded-full">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-ember to-fire text-white text-xs font-semibold rounded-full">
                   Most Popular
                 </div>
               )}
@@ -119,7 +119,7 @@ export default function Pricing() {
                     key={feature}
                     className="flex items-center gap-3 text-sm text-white"
                   >
-                    <span className="text-cyan-400">✓</span>
+                    <span className="text-ember">✓</span>
                     {feature}
                   </li>
                 ))}
@@ -130,7 +130,7 @@ export default function Pricing() {
                 whileTap={{ scale: 0.98 }}
                 className={`w-full py-3 rounded-full font-medium transition-all duration-300 ${
                   plan.popular
-                    ? "bg-gradient-to-r from-cyan-500 to-purple-600 text-white hover:from-cyan-400 hover:to-purple-500"
+                    ? "bg-gradient-to-r from-ember to-fire text-white hover:from-amber hover:to-fire"
                     : "bg-zinc-800 text-white hover:bg-zinc-700"
                 }`}
               >

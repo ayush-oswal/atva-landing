@@ -60,10 +60,10 @@ export default function Process() {
             >
               {/* Connector line */}
               {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-8 left-full w-full h-px bg-gradient-to-r from-cyan-500/50 via-purple-500/50 to-transparent" />
+                <div className="hidden lg:block absolute top-8 left-full w-full h-px bg-gradient-to-r from-clay/50 via-fire/50 to-transparent" />
               )}
               
-              <div className="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-4">
+              <div className="text-5xl font-bold bg-gradient-to-r from-ember to-fire bg-clip-text text-transparent mb-4">
                 {step.number}
               </div>
               <h3 className="text-xl font-semibold text-white mb-3">
