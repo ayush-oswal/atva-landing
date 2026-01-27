@@ -108,6 +108,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.8 }}
         >
           <motion.button
+            suppressHydrationWarning
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={scrollToContact}

@@ -104,6 +104,7 @@ export default function Contact() {
           <div>
             <label className="block text-sm text-white/80 mb-2">Name *</label>
             <input
+              suppressHydrationWarning
               type="text"
               name="name"
               value={formData.name}
@@ -118,6 +119,7 @@ export default function Contact() {
           <div>
             <label className="block text-sm text-white/80 mb-2">Email *</label>
             <input
+              suppressHydrationWarning
               type="email"
               name="email"
               value={formData.email}
@@ -132,6 +134,7 @@ export default function Contact() {
           <div>
             <label className="block text-sm text-white/80 mb-2">Company</label>
             <input
+              suppressHydrationWarning
               type="text"
               name="company"
               value={formData.company}
@@ -147,6 +150,7 @@ export default function Contact() {
               Budget (optional)
             </label>
             <select
+              suppressHydrationWarning
               name="budget"
               value={formData.budget}
               onChange={handleChange}
@@ -166,6 +170,7 @@ export default function Contact() {
               Message *
             </label>
             <textarea
+              suppressHydrationWarning
               name="message"
               value={formData.message}
               onChange={handleChange}
@@ -179,6 +184,7 @@ export default function Contact() {
           {/* Submit */}
           <div className="md:col-span-2">
             <motion.button
+              suppressHydrationWarning
               type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}

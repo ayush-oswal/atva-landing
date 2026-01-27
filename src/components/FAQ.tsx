@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 const faqs = [
@@ -72,6 +72,7 @@ export default function FAQ() {
               className="rounded-xl bg-zinc-900/50 border border-zinc-800 overflow-hidden"
             >
               <button
+                suppressHydrationWarning
                 onClick={() => toggleFAQ(index)}
                 className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-zinc-800/50 transition-colors"
               >
