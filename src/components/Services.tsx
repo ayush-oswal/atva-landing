@@ -1,110 +1,260 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const services = [
-  {
-    title: "Digital Marketing & Branding",
-    description:
-      "Build a powerful brand identity and reach your target audience through strategic digital campaigns that convert.",
-    icon: "📣",
-  },
-  {
-    title: "SEO & Content Marketing",
-    description:
-      "Dominate search rankings with data-driven SEO strategies and compelling content that drives organic growth.",
-    icon: "🔍",
-  },
-  {
-    title: "Google Ads Management",
-    description:
-      "Maximize ROI with expertly managed Google Ads campaigns. From search to display, we optimize every click.",
-    icon: "🎯",
-  },
-  {
-    title: "Meta Ads",
-    description:
-      "Reach billions on Facebook and Instagram with precision-targeted ad campaigns that deliver measurable results.",
-    icon: "📱",
-  },
-  {
-    title: "Website Design",
-    description:
-      "Stunning, conversion-optimized websites that captivate visitors and turn them into loyal customers.",
-    icon: "🎨",
-  },
-  {
-    title: "Automations & AI Consulting",
-    description:
-      "Leverage AI-enabled products and workflows to automate operations and unlock exponential growth potential.",
-    icon: "🤖",
-  },
-];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
-  },
-};
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function Services() {
+  const pillars = useMemo(
+    () => [
+      {
+        id: "strategy",
+        leftLabel: "STRATEGY",
+        title: "STRATEGY",
+        subtitle: "The Foundation",
+        accentClass: "text-[#FF5733]",
+        items: [
+          "Market Research & ICP Definition",
+          "Campaign Planning & Roadmapping",
+          "Data Analytics & Optimization (Ex: Providing Dashboards to track APIs)",
+          "AI Consulting & Implementation (AI Enablement and AI Workflows AI Native strategy)",
+        ],
+      },
+      {
+        id: "design",
+        leftLabel: "DESIGN",
+        title: "DESIGN",
+        subtitle: "The Experience",
+        accentClass: "text-[#FF5733]",
+        items: [
+          "Brand Identity & Visual Design (Company Branding, Logos, Assets, Animations etc)",
+          "Website Design & Development",
+          "Marketing Collateral (Ex: Hoardings, Magazines, Signages etc)",
+        ],
+      },
+      {
+        id: "content",
+        leftLabel: "CONTENT",
+        title: "CONTENT",
+        subtitle: "The Voice",
+        accentClass: "text-[#FF5733]",
+        items: [
+          "SEO (Making website appear on top on google listings, AI Listings)",
+          "Content Strategy (Designing Content calendars, Format Strategy, and more)",
+          "Blog Posts & Long-form Content",
+          "Video & Multimedia Production",
+          "Email Campaigns (AK Research & Ayush O)",
+          "Social Media Content",
+          "Community Management",
+        ],
+      },
+      {
+        id: "marketing",
+        leftLabel: "MARKETING",
+        title: "MARKETING",
+        subtitle: "The Amplifier",
+        accentClass: "text-[#FF5733]",
+        items: [
+          "Google Ads Management",
+          "Meta Ads",
+          "Marketing Automation (Based on client requirements)",
+          "Analytics & Reporting",
+          "Social Media Management",
+        ],
+      },
+    ],
+    [],
+  );
+
+  const [activeId, setActiveId] = useState(pillars[0]?.id ?? "strategy");
+  const [navStyle, setNavStyle] = useState<"top" | "fixed" | "bottom">("top");
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const contentRefs = useRef<Record<string, HTMLElement | null>>({});
+  const navRef = useRef<HTMLDivElement | null>(null);
+
+  // Track section scroll position for sticky nav behavior
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current || !navRef.current) return;
+
+      const section = sectionRef.current;
+      const sectionRect = section.getBoundingClientRect();
+      const navHeight = navRef.current.offsetHeight;
+      const headerOffset = 112; // top-28 = 7rem = 112px
+
+      // Section hasn't reached the top yet
+      if (sectionRect.top > headerOffset) {
+        setNavStyle("top");
+      }
+      // Section has scrolled past (nav should stick to bottom)
+      else if (sectionRect.bottom < navHeight + headerOffset + 100) {
+        setNavStyle("bottom");
+      }
+      // Section is in view - nav should be fixed
+      else {
+        setNavStyle("fixed");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Track active pillar based on scroll
+  useEffect(() => {
+    const els = pillars
+      .map((p) => contentRefs.current[p.id])
+      .filter(Boolean) as HTMLElement[];
+
+    if (els.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0));
+
+        const top = visible[0];
+        if (!top) return;
+        const id = (top.target as HTMLElement).dataset.pillarId;
+        if (id) setActiveId(id);
+      },
+      {
+        root: null,
+        threshold: [0.2, 0.35, 0.5, 0.65],
+        rootMargin: "-35% 0px -45% 0px",
+      },
+    );
+
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [pillars]);
+
+  const scrollTo = (id: string) => {
+    const el = contentRefs.current[id];
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const getNavClasses = () => {
+    const base = "hidden lg:block w-[280px] z-40";
+    switch (navStyle) {
+      case "fixed":
+        return `${base} fixed top-28`;
+      case "bottom":
+        return `${base} absolute bottom-0 left-6`;
+      default:
+        return `${base} absolute top-0 left-6`;
+    }
+  };
+
   return (
-    <section id="services" className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section ref={sectionRef} id="services" className="relative py-32 px-6">
+      {/* Left sticky nav - Desktop only */}
+      <div ref={navRef} className={getNavClasses()}>
+        <nav className="relative flex flex-col gap-0 pr-8">
+          {/* Animated indicator bar */}
+          <motion.div
+            className="absolute left-0 h-14 w-1 rounded-full bg-[#FF5733]"
+            initial={false}
+            animate={{
+              y: pillars.findIndex((p) => p.id === activeId) * 56,
+            }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          />
+          {pillars.map((p) => {
+            const isActive = activeId === p.id;
+            return (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => scrollTo(p.id)}
+                className={[
+                  "text-left text-3xl font-bold tracking-tight transition-colors duration-200 h-14 pl-5",
+                  isActive ? "text-[#FF5733]" : "text-white/30 hover:text-white/60",
+                ].join(" ")}
+              >
+                {p.leftLabel}
+              </button>
+            );
+          })}
+        </nav>
+      </div>
+
+      {/* Mobile horizontal nav */}
+      <div className="lg:hidden mb-8 overflow-x-auto">
+        <nav className="flex gap-6 pb-4">
+          {pillars.map((p) => {
+            const isActive = activeId === p.id;
+            return (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => scrollTo(p.id)}
+                className={[
+                  "text-2xl font-bold tracking-tight transition-colors duration-200 whitespace-nowrap",
+                  isActive ? "text-[#FF5733]" : "text-white/30 hover:text-white/60",
+                ].join(" ")}
+              >
+                {p.leftLabel}
+              </button>
+            );
+          })}
+        </nav>
+      </div>
+
+      <div className="mx-auto w-full max-w-7xl">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-16 text-center lg:text-left lg:pl-[320px]"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Services
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+            Services that make business{" "}
+            <span className="relative inline-block px-2 font-serif italic text-[#FF5733]">
+              sense
+            </span>
           </h2>
-          <p className="text-white/80 max-w-2xl mx-auto">
-            Comprehensive digital solutions to accelerate your business growth
-          </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {services.map((service) => (
-            <motion.div
-              key={service.title}
-              variants={cardVariants}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className="group relative p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-transparent transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10"
+        {/* Right details column */}
+        <div className="lg:pl-[320px] space-y-16">
+          {pillars.map((p) => (
+            <motion.section
+              key={p.id}
+              ref={(el) => {
+                contentRefs.current[p.id] = el;
+              }}
+              data-pillar-id={p.id}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.5 }}
+              className="rounded-2xl bg-[#242424] p-10 shadow-xl shadow-black/30"
             >
-              {/* Gradient border on hover */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/0 via-purple-500/0 to-cyan-500/0 group-hover:from-cyan-500/50 group-hover:via-purple-500/50 group-hover:to-cyan-500/50 transition-all duration-300 -z-10 blur-sm" />
-              <div className="text-4xl mb-4">{service.icon}</div>
-              <h3 className="text-xl font-semibold text-white mb-3 group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-400 group-hover:bg-clip-text group-hover:text-transparent transition-colors">
-                {service.title}
-              </h3>
-              <p className="text-white text-sm leading-relaxed">
-                {service.description}
-              </p>
-            </motion.div>
+              <div className="flex flex-col gap-2">
+                <p className="text-sm tracking-widest uppercase text-white/50">
+                  Pillar
+                </p>
+                <h3 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+                  {p.title}{" "}
+                  <span className={p.accentClass}>—</span>{" "}
+                  <span className="text-white/70">{p.subtitle}</span>
+                </h3>
+              </div>
+
+              <div className="mt-10 space-y-5">
+                {p.items.map((item) => (
+                  <div key={item} className="flex items-start gap-4">
+                    <span className="mt-2.5 inline-block h-2 w-2 rounded-full bg-[#FF5733] shadow-sm shadow-[#FF5733]/30" />
+                    <p className="text-base text-white/75 md:text-lg leading-relaxed">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.section>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

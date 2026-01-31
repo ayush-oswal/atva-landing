@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-6">
+    <section id="about" className="py-32 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Content */}
@@ -14,10 +14,10 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8 tracking-tight">
               About atva
             </h2>
-            <div className="space-y-4 text-white/80 leading-relaxed">
+            <div className="space-y-5 text-white/75 leading-relaxed text-base md:text-lg">
               <p>
                 We&apos;re not your typical agency. At atva, we blend cutting-edge 
                 technology with battle-tested marketing strategies to deliver 
@@ -36,9 +36,9 @@ export default function About() {
               </p>
             </div>
 
-            <div className="mt-8 grid grid-cols-2 gap-6">
+            <div className="mt-12 grid grid-cols-2 gap-8">
               <div>
-                <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-1">
+                <div className="text-2xl font-bold text-[#FF5733] mb-1">
                   Data-Driven
                 </div>
                 <p className="text-sm text-white/70">
@@ -46,7 +46,7 @@ export default function About() {
                 </p>
               </div>
               <div>
-                <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-1">
+                <div className="text-2xl font-bold text-[#FF5733] mb-1">
                   Results-First
                 </div>
                 <p className="text-sm text-white/70">
@@ -64,14 +64,14 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="aspect-square rounded-3xl bg-gradient-to-br from-cyan-900/30 via-purple-900/50 to-zinc-900 border border-cyan-500/20 p-8 flex items-center justify-center">
+            <div className="aspect-square rounded-3xl bg-[#2A2A2A] p-8 flex items-center justify-center shadow-2xl shadow-black/40">
               <div className="text-center">
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="w-32 h-32 mx-auto mb-6 rounded-full border-2 border-dashed border-cyan-500/50"
+                  className="w-32 h-32 mx-auto mb-6 rounded-full bg-[#FF5733]/10 shadow-lg shadow-[#FF5733]/10"
                 />
-                <div className="text-6xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                <div className="text-6xl font-bold text-[#FF5733]">
                   atva
                 </div>
                 <p className="text-white/70 mt-2 text-sm">
@@ -81,8 +81,8 @@ export default function About() {
             </div>
 
             {/* Decorative elements */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 bg-cyan-500/20 rounded-full blur-2xl" />
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl" />
+            <div className="absolute -top-4 -right-4 w-24 h-24 bg-[#FF5733]/20 rounded-full blur-2xl" />
+            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-[#FF5733]/10 rounded-full blur-3xl" />
           </motion.div>
         </div>
       </div>

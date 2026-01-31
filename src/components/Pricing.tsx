@@ -70,7 +70,7 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="max-w-2xl mx-auto mb-16 p-6 rounded-2xl bg-gradient-to-r from-cyan-900/30 via-purple-900/30 to-cyan-900/30 border border-cyan-500/30 text-center"
+          className="max-w-2xl mx-auto mb-16 p-6 rounded-2xl bg-[#3C3C3C]/40 border border-[#FF5733]/30 text-center"
         >
           <h3 className="text-xl font-semibold text-white mb-2">
             Pay-As-You-Go Model
@@ -92,12 +92,12 @@ export default function Pricing() {
               whileHover={{ y: -5 }}
               className={`relative p-6 rounded-2xl border transition-all duration-300 ${
                 plan.popular
-                  ? "bg-gradient-to-b from-cyan-900/30 via-purple-900/40 to-zinc-900/50 border-cyan-500/50 shadow-lg shadow-cyan-500/10"
-                  : "bg-zinc-900/50 border-zinc-800 hover:border-cyan-500/30"
+                  ? "bg-[#3C3C3C]/50 border-[#FF5733]/50 shadow-lg shadow-[#FF5733]/10"
+                  : "bg-[#3C3C3C]/40 border-[#3C3C3C] hover:border-[#FF5733]/30"
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-cyan-500 to-purple-600 text-white text-xs font-semibold rounded-full">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#FF5733] text-white text-xs font-semibold rounded-full">
                   Most Popular
                 </div>
               )}
@@ -109,7 +109,7 @@ export default function Pricing() {
                   <span className="text-4xl font-bold text-white">
                     {plan.price}
                   </span>
-                  <span className="text-zinc-500 text-sm">/{plan.period}</span>
+                  <span className="text-white/50 text-sm">/{plan.period}</span>
                 </div>
                 <p className="text-white/80 text-sm mt-2">{plan.description}</p>
               </div>
@@ -119,7 +119,7 @@ export default function Pricing() {
                     key={feature}
                     className="flex items-center gap-3 text-sm text-white"
                   >
-                    <span className="text-cyan-400">✓</span>
+                    <span className="text-[#FF5733]">✓</span>
                     {feature}
                   </li>
                 ))}
@@ -129,8 +129,8 @@ export default function Pricing() {
                 whileTap={{ scale: 0.98 }}
                 className={`w-full py-3 rounded-full font-medium transition-all duration-300 ${
                   plan.popular
-                    ? "bg-gradient-to-r from-cyan-500 to-purple-600 text-white hover:from-cyan-400 hover:to-purple-500"
-                    : "bg-zinc-800 text-white hover:bg-zinc-700"
+                    ? "bg-[#FF5733] text-white hover:bg-[#FF5733]/90"
+                    : "bg-[#3C3C3C] text-white hover:bg-[#3C3C3C]/80"
                 }`}
               >
                 Get Started

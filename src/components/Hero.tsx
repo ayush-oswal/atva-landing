@@ -1,8 +1,29 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useRef } from "react";
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.85, 1], [1, 1, 0]);
+  
+  // Layered parallax for depth - different speeds for different elements
+  const fgY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const fgScale = useTransform(scrollYProgress, [0, 1], [1, 0.98]);
+  const headlineY = useTransform(scrollYProgress, [0, 1], [0, -40]);
+  const subtextY = useTransform(scrollYProgress, [0, 1], [0, -25]);
+  const ctaY = useTransform(scrollYProgress, [0, 1], [0, -15]);
+  
+  // Smooth spring for foreground opacity fade
+  const fgOpacityRaw = useTransform(scrollYProgress, [0.6, 0.95], [1, 0]);
+  const fgOpacity = useSpring(fgOpacityRaw, { stiffness: 100, damping: 30 });
+
   const scrollToContact = () => {
     const element = document.querySelector("#contact");
     if (element) {
@@ -11,107 +32,106 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Video/Animation Placeholder Background */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-purple-900/10 via-black to-black" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-900/20 via-transparent to-transparent" />
-        {/* Animated gradient orbs */}
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.2, 0.3, 0.2],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-1/2 right-1/3 w-64 h-64 bg-cyan-400/15 rounded-full blur-3xl"
-        />
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen overflow-hidden"
+    >
+      {/* Video/Animation Placeholder Background - Sticky like navbar */}
+      <div
+        className="fixed inset-0 z-0 pointer-events-none"
+      >
+        <motion.video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className="absolute inset-0 h-full w-full object-cover"
+        >
+          <source src="/vid.mp4" type="video/mp4" />
+        </motion.video>
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute inset-0 bg-[#1A1A1A]/70" />
       </div>
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/50 z-10" />
-
       {/* Content */}
-      <div className="relative z-20 max-w-5xl mx-auto px-6 text-center">
+      <motion.div
+        style={{ y: fgY, scale: fgScale, opacity: fgOpacity }}
+        className="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-end pb-32 px-8 md:px-12 lg:px-16 text-left will-change-transform"
+      >
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="mb-4"
+          style={{ y: headlineY }}
+          className="mb-6 overflow-hidden"
         >
-          <span className="text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-            ATVA
-          </span>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="flex justify-start gap-1"
+          >
+            {["A", "T", "V", "A"].map((letter, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.2 + i * 0.1,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
+                className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#FF5733]"
+              >
+                {letter}
+              </motion.span>
+            ))}
+          </motion.div>
         </motion.div>
 
-        <motion.p
+        {/* <motion.p
+          style={{ y: subtextY }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-cyan-400 text-sm font-medium tracking-widest uppercase mb-6"
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="text-[#FF5733] text-sm font-medium tracking-widest uppercase mb-8"
         >
           Marketing • SEO • Web Design • AI Consulting
-        </motion.p>
+        </motion.p> */}
 
         <motion.h1
+          style={{ y: headlineY }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
+          transition={{ duration: 0.7, delay: 0.7 }}
+          className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8"
         >
           We Build Brands That
-          <span className="block bg-gradient-to-r from-cyan-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
+          <span className="block mt-2 text-[#FF5733]">
             Dominate Digitally
           </span>
         </motion.h1>
 
-        <motion.p
+        {/* <motion.p
+          style={{ y: subtextY }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10"
+          transition={{ duration: 0.6, delay: 0.85 }}
+          className="text-lg md:text-xl text-white/75 max-w-2xl mb-12"
         >
-          Data-driven marketing, cutting-edge SEO, stunning web design, and AI-powered 
-          solutions to scale your business beyond limits.
-        </motion.p>
+          Data-driven marketing, cutting-edge SEO, stunning web design, and
+          AI-powered solutions to scale your business beyond limits.
+        </motion.p> */}
 
         <motion.div
+          style={{ y: ctaY }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 1 }}
         >
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
             onClick={scrollToContact}
-            className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-full hover:from-cyan-400 hover:to-purple-500 transition-all duration-300 shadow-lg shadow-cyan-500/25 cursor-default select-none"
+            className="px-12 py-5 bg-[#FF5733] text-white font-semibold rounded-full hover:bg-[#FF5733]/90 transition-all duration-300 shadow-xl shadow-black/30 cursor-default select-none"
           >
             Let&apos;s Grow Your Business
           </motion.button>
@@ -121,18 +141,25 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          transition={{ delay: 1.4 }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2"
         >
           <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-6 h-10 rounded-full flex justify-center pt-2 bg-white/5 shadow-lg shadow-black/20"
           >
-            <div className="w-1 h-2 bg-white/50 rounded-full" />
+            <motion.div 
+              animate={{ opacity: [0.3, 0.7, 0.3] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="w-1 h-2 bg-white/60 rounded-full" 
+            />
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
+
+      {/* Soft gradient transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/50 to-transparent pointer-events-none z-20" />
     </section>
   );
 }

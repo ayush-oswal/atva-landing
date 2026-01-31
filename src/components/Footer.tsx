@@ -9,12 +9,12 @@ export default function Footer() {
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="py-12 px-6 border-t border-zinc-800"
+      className="py-12 px-6 border-t border-[#3C3C3C]"
     >
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Copyright */}
-          <div className="text-zinc-500 text-sm">
+          <div className="text-white/50 text-sm">
             © 2026 atva. All rights reserved.
           </div>
 
@@ -25,7 +25,7 @@ export default function Footer() {
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zinc-500 hover:text-cyan-400 transition-colors"
+              className="text-white/50 hover:text-[#FF5733] transition-colors"
               aria-label="Instagram"
             >
               <svg
@@ -43,18 +43,18 @@ export default function Footer() {
             </a>
 
             {/* Divider */}
-            <div className="w-px h-4 bg-zinc-700" />
+            <div className="w-px h-4 bg-[#3C3C3C]" />
 
             {/* Links */}
             <a
               href="#"
-              className="text-zinc-500 hover:text-white text-sm transition-colors"
+              className="text-white/50 hover:text-white text-sm transition-colors"
             >
               Privacy Policy
             </a>
             <a
               href="#"
-              className="text-zinc-500 hover:text-white text-sm transition-colors"
+              className="text-white/50 hover:text-white text-sm transition-colors"
             >
               Terms
             </a>
