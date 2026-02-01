@@ -234,9 +234,7 @@ export default function Services() {
               className="rounded-2xl bg-[#242424] p-10 shadow-xl shadow-black/30"
             >
               <div className="flex flex-col gap-2">
-                <p className="text-sm tracking-widest uppercase text-white/50">
-                  Pillar
-                </p>
+                
                 <h3 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
                   {p.title}{" "}
                   <span className={p.accentClass}>—</span>{" "}
